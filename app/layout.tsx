@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Courier_Prime, Caveat, Yesteryear } from "next/font/google";
 import "./globals.css";
+import { SvgDefs } from "@/components/SvgDefs";
 
 const courier = Courier_Prime({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-tw" });
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-hand" });
@@ -20,7 +21,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${courier.variable} ${caveat.variable} ${yesteryear.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SvgDefs />
+        {children}
+      </body>
     </html>
   );
 }
