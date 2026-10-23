@@ -5,7 +5,7 @@ import { BloomShape } from "./Bloom";
 const INK = "#1B1B1B";
 
 /** Fixed foliage behind every bouquet, so even three blooms look full. */
-function Foliage() {
+export function Foliage() {
   return (
     <g filter="url(#pp-leaf)" fill="#2F6B45">
       <path d="M150 335 C 120 260, 80 205, 22 178 C 92 192, 136 248, 150 335 Z" />
@@ -34,16 +34,22 @@ function GreenShape({ type }: { type: GreenType }) {
   );
 }
 
+export const itemTransform = (item: Item) => `translate(${item.x} ${item.y}) rotate(${item.r}) scale(${item.s / 100})`;
+
+/** The drawing of one item in its own -50..50 space (no transform). */
+export function ItemContent({ item }: { item: Item }) {
+  return item.kind === "bloom" ? <BloomShape type={item.type} /> : <GreenShape type={item.type} />;
+}
+
 function ItemShape({ item }: { item: Item }) {
-  const scale = item.s / 100;
   return (
-    <g transform={`translate(${item.x} ${item.y}) rotate(${item.r}) scale(${scale})`}>
-      {item.kind === "bloom" ? <BloomShape type={item.type} /> : <GreenShape type={item.type} />}
+    <g transform={itemTransform(item)}>
+      <ItemContent item={item} />
     </g>
   );
 }
 
-function Wrap({ color, ribbon }: { color: string; ribbon: string }) {
+export function Wrap({ color, ribbon }: { color: string; ribbon: string }) {
   return (
     <g stroke={INK} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round">
       <path d="M36 196 Q 70 224 104 204 Q 150 238 196 204 Q 230 224 264 196 L 168 336 L 132 336 Z" fill={color} />

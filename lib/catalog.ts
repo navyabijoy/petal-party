@@ -10,7 +10,6 @@ export type BloomInfo = {
   color: "red" | "pink" | "yellow" | "orange" | "purple" | "blue" | "white";
   size: "L" | "M" | "S";
   meaning: string;
-  locked?: boolean;
 };
 
 export const BLOOMS: BloomInfo[] = [
@@ -21,7 +20,7 @@ export const BLOOMS: BloomInfo[] = [
   { type: "sunflower", name: "Sunflower", moods: ["cheerful", "rustic"], color: "yellow", size: "L", meaning: "happiness" },
   { type: "gerbera", name: "Gerbera", moods: ["cheerful", "wild"], color: "pink", size: "M", meaning: "cheerfulness" },
   { type: "anemone", name: "Anemone", moods: ["calm", "elegant", "wild"], color: "blue", size: "M", meaning: "anticipation" },
-  { type: "lily", name: "Lily", moods: ["calm", "elegant"], color: "purple", size: "L", meaning: "devotion", locked: true },
+  { type: "lily", name: "Lily", moods: ["calm", "elegant"], color: "purple", size: "L", meaning: "devotion" },
 ];
 
 export const BLOOM_BY_TYPE = Object.fromEntries(BLOOMS.map((b) => [b.type, b])) as Record<BloomType, BloomInfo>;
