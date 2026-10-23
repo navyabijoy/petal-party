@@ -1,69 +1,32 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="screen">
+      <div style={{ textAlign: "center", marginTop: 24 }}>
+        <h1 className="logo" style={{ fontSize: 66, lineHeight: 1, margin: 0 }}>Petal Party</h1>
+        <p className="tw" style={{ fontSize: 12, letterSpacing: 3, textTransform: "uppercase", margin: "6px 0 0" }}>
+          make a bouquet · win the room
+        </p>
+      </div>
+
+      <div style={{ flex: 1, display: "grid", placeItems: "center", minHeight: 280 }}>
+        <div className="note" style={{ width: 220, transform: "rotate(3deg)" }}>
+          <span className="tape" />
+          <span className="tw" style={{ display: "block", fontSize: 10, fontWeight: 700, letterSpacing: 1.5 }}>TODAY&apos;S THEME</span>
+          <span className="hand" style={{ display: "block", fontSize: 34, fontWeight: 700, lineHeight: 1 }}>Fairy Garden</span>
+          <span className="tw" style={{ display: "block", fontSize: 11, marginTop: 4 }}>bouquets coming soon</span>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+
+      <Link href="/studio" className="btn-black" style={{ height: 62, flexDirection: "column", gap: 2 }}>
+        <span style={{ fontSize: 20 }}>Play a round</span>
+        <span style={{ fontSize: 11, fontWeight: 400, letterSpacing: 1, textTransform: "none" }}>live room · 4–10 players · 3 min</span>
+      </Link>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <Link href="/studio?mode=gift" className="btn-outline" style={{ fontSize: 13 }}>Send a bouquet</Link>
+        <Link href="/room" className="btn-outline" style={{ fontSize: 13 }}>Friends room</Link>
+      </div>
+    </main>
   );
 }
