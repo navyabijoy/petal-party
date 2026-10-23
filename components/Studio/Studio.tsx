@@ -19,6 +19,7 @@ type Props = {
   minBlooms: number;
   maxBlooms: number;
   doneLabel?: string;
+  busy?: boolean;
   initial?: Arrangement;
   onDone: (arrangement: Arrangement) => void;
 };
@@ -31,7 +32,7 @@ function Icon({ d }: { d: string }) {
   );
 }
 
-export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", initial, onDone }: Props) {
+export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", busy = false, initial, onDone }: Props) {
   const [state, dispatch] = useReducer(reducer, initial, (i) => initialState(i));
   const [tab, setTab] = useState<TabId>("blooms");
   const { present, selectedId } = state;
@@ -54,7 +55,7 @@ export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", initia
     <main className={styles.studio}>
       <div className={styles.top}>
         {label ? <span className="stamp">{label}</span> : <span className="tw" style={{ fontWeight: 700, letterSpacing: 2 }}>STUDIO</span>}
-        <button className={`btn-black ${styles.done}`} disabled={!ready} onClick={() => onDone(present)}>
+        <button className={`btn-black ${styles.done}`} disabled={!ready || busy} onClick={() => onDone(present)}>
           {doneLabel}
         </button>
       </div>
