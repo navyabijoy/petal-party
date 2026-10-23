@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TodayTheme } from "./TodayTheme";
 
 export default function Home() {
   return (
@@ -11,12 +12,7 @@ export default function Home() {
       </div>
 
       <div style={{ flex: 1, display: "grid", placeItems: "center", minHeight: 280 }}>
-        <div className="note" style={{ width: 220, transform: "rotate(3deg)" }}>
-          <span className="tape" />
-          <span className="tw" style={{ display: "block", fontSize: 10, fontWeight: 700, letterSpacing: 1.5 }}>TODAY&apos;S THEME</span>
-          <span className="hand" style={{ display: "block", fontSize: 34, fontWeight: 700, lineHeight: 1 }}>Fairy Garden</span>
-          <span className="tw" style={{ display: "block", fontSize: 11, marginTop: 4 }}>bouquets coming soon</span>
-        </div>
+        <TodayTheme />
       </div>
 
       <Link href="/studio" className="btn-black" style={{ height: 62, flexDirection: "column", gap: 2 }}>

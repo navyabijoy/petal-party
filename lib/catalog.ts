@@ -48,3 +48,7 @@ export const RIBBONS: Swatch[] = [
   { id: "plum", name: "Plum", color: "#6A4C93" },
   { id: "gold", name: "Gold", color: "#E0A82E" },
 ];
+
+/** Coin cost of an item, for theme budgets. */
+export const BLOOM_PRICE = { L: 8, M: 5, S: 3 } as const;
+export const GREEN_PRICE = 2;
