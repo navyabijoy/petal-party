@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useReducer, useState } from "react";
+import { useEffect, useMemo, useReducer, useState, type ReactNode } from "react";
 import { LIMITS, type Arrangement, type Item } from "@/lib/arrangement";
 import { BLOOM_BY_TYPE, type GreenType } from "@/lib/catalog";
 import type { BloomType } from "@/lib/blooms";
@@ -20,6 +20,10 @@ type Props = {
   maxBlooms: number;
   doneLabel?: string;
   busy?: boolean;
+  /** Shown next to the label, e.g. a countdown. */
+  timer?: ReactNode;
+  /** Called with the latest bouquet whenever it changes. */
+  onChange?: (arrangement: Arrangement) => void;
   initial?: Arrangement;
   onDone: (arrangement: Arrangement) => void;
 };
@@ -32,10 +36,14 @@ function Icon({ d }: { d: string }) {
   );
 }
 
-export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", busy = false, initial, onDone }: Props) {
+export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", busy = false, timer, onChange, initial, onDone }: Props) {
   const [state, dispatch] = useReducer(reducer, initial, (i) => initialState(i));
   const [tab, setTab] = useState<TabId>("blooms");
   const { present, selectedId } = state;
+
+  useEffect(() => {
+    onChange?.(present);
+  }, [present, onChange]);
 
   const blooms = useMemo(() => countBlooms(present), [present]);
   const atLimit = blooms >= maxBlooms || present.items.length >= LIMITS.maxItems;
@@ -54,7 +62,10 @@ export function Studio({ label, minBlooms, maxBlooms, doneLabel = "Done", busy =
   return (
     <main className={styles.studio}>
       <div className={styles.top}>
-        {label ? <span className="stamp">{label}</span> : <span className="tw" style={{ fontWeight: 700, letterSpacing: 2 }}>STUDIO</span>}
+        <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {label ? <span className="stamp">{label}</span> : <span className="tw" style={{ fontWeight: 700, letterSpacing: 2 }}>STUDIO</span>}
+          {timer}
+        </span>
         <button className={`btn-black ${styles.done}`} disabled={!ready || busy} onClick={() => onDone(present)}>
           {doneLabel}
         </button>

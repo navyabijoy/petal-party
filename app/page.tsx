@@ -15,7 +15,7 @@ export default function Home() {
         <TodayTheme />
       </div>
 
-      <Link href="/studio" className="btn-black" style={{ height: 62, flexDirection: "column", gap: 2 }}>
+      <Link href="/room" className="btn-black" style={{ height: 62, flexDirection: "column", gap: 2 }}>
         <span style={{ fontSize: 20 }}>Play a round</span>
         <span style={{ fontSize: 11, fontWeight: 400, letterSpacing: 1, textTransform: "none" }}>live room · 4–10 players · 3 min</span>
       </Link>

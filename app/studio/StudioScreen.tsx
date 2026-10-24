@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Studio } from "@/components/Studio/Studio";
 import type { Arrangement } from "@/lib/arrangement";
+import { sendGift } from "@/lib/giftClient";
 
 /** Free studio: make a bouquet, save it as a gift link. */
 export function StudioScreen() {
@@ -15,10 +16,8 @@ export function StudioScreen() {
     setBusy(true);
     setError("");
     try {
-      const res = await fetch("/api/gifts", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(arrangement) });
-      const data = (await res.json()) as { id?: string; error?: string };
-      if (!res.ok || !data.id) throw new Error(data.error ?? "Couldn't save your bouquet.");
-      router.push(`/g/${data.id}`);
+      const id = await sendGift(arrangement);
+      router.push(`/g/${id}`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Couldn't save your bouquet.");
       setBusy(false);
